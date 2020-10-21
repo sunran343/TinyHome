@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import CliperReducer from "./cliper/reducer.js";
+import * as Cliper from "./cliper/reducer.js";
+import * as ShortUrl from "./shorturl/reducer.js";
 
 const allReducers = {
-    CliperReducer
+    Cliper,
+    ShortUrl
 };
 
 const rootReducers = combineReducers(allReducers);
