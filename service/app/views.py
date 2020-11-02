@@ -10,7 +10,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter
 from rest_framework.viewsets import ModelViewSet
 
-from app import utils, mhttp
+from app import utils, mhttp, constant
 from app.models import User, Record, ShortUrl
 from app.serializers import UserSerializer, RecordSerializer, ShortUrlSerializer
 
@@ -62,14 +62,17 @@ class RecordViewset(ModelViewSet):
 
 # 短码view
 class ShortUrlViewset(ModelViewSet):
-    queryset = ShortUrl.objects.all().order_by('-created_time')
+    shorturl_prefix = 'http://cliper.justsmile.cn/'
+
+    queryset = ShortUrl.objects.all().order_by('-created_time').filter(is_delete=False)
+
     serializer_class = ShortUrlSerializer
     # drf 过滤&搜索&排序
     filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter,)
     # 搜索
     # search_fields = ('username', 'phone', 'email',)
     # 过滤
-    filter_fields = ('user', 'short_code', 'is_active')
+    filter_fields = ('user', 'short_code', 'is_active','is_delete')
     # 排序
     ordering_fields = ('created_time',)
 
@@ -89,9 +92,9 @@ class ShortUrlViewset(ModelViewSet):
             if not is_good:
                 return mhttp.params_error(message='URL不合法')
             # 检查url是否已经生成过
-            objs = ShortUrl.objects.all().filter(url=url, is_active=True)
+            objs = ShortUrl.objects.all().filter(url=url, is_active=True, user=user_id, is_delete=False)
             if len(objs) > 0:
-                return mhttp.result(data={'url': 'xxx' + objs[0].short_code})
+                return mhttp.result(data={'url': constant.shorturl_prefix + objs[0].short_code})
             # 生成短码
             while True:
                 short_code = utils.random_str(size=4)
@@ -102,6 +105,13 @@ class ShortUrlViewset(ModelViewSet):
             shortUrl = ShortUrl()
             shortUrl.url = url
             shortUrl.short_code = short_code
-            shortUrl.user = user_id
+            shortUrl.user = User.objects.get(id=user_id)
             shortUrl.save()
-            return mhttp.result(data={'url': 'xxx' + short_code})
+            return mhttp.result(data={'url': constant.shorturl_prefix + short_code})
+
+    @action(methods=['post'], detail=False)
+    def deleteByUserId(self, request):
+        userId = request.POST.get('userId')
+        ShortUrl.objects.all().filter(user=userId,is_delete=False).update(is_delete=True)
+        return mhttp.result()
+

@@ -54,8 +54,8 @@ export default function TextRecord(props) {
                 renderItem={item =>
                     <List.Item>
                         <Row justify="space-between" style={{width: "100%"}}>
-                            <Col style={{maxWidth: "70%"}}>
-                                <Paragraph ellipsis>
+                            <Col style={{maxWidth: "70%"}} >
+                                <Paragraph>
                                     {item.text_content}
                                 </Paragraph>
                             </Col>

@@ -1,24 +1,35 @@
 import React from "react";
 import {connect} from "react-redux";
-import  {Button, Col, Divider, Input, Row,Table} from "antd";
+import {Button, Col, Divider, Input, Row, Table, Typography} from "antd";
 import CopyFilled from "@ant-design/icons/lib/icons/CopyFilled";
 import SyncOutlined from "@ant-design/icons/lib/icons/SyncOutlined";
 import DeleteOutlined from "@ant-design/icons/lib/icons/DeleteOutlined";
-
-
+import {SmileTwoTone, HeartTwoTone, CheckCircleTwoTone, CloseCircleTwoTone} from '@ant-design/icons';
+const { Paragraph } = Typography;
 export function ShortUrl(props) {
     const columns = [
         {
             title: '短网址',
-            dataIndex: 'shortUrl',
+            dataIndex: 'short_url',
             key: 'shortUrl',
-            render: text => <a>{text}</a>,
+            render: text => <a href={''+text}>{text}</a>,
+            width: '40%',
+            ellipsis: true,
         },
         {
             title: '原网址',
-            dataIndex: 'longUrl',
+            dataIndex: 'url',
             key: 'longUrl',
-            render: text => <a>{text}</a>,
+            render: text => <a href={text}>{text}</a>,
+            ellipsis: true,
+            width: '50%'
+        },
+        {
+            title: '状态',
+            dataIndex: 'is_active',
+            key: 'isActive',
+            render: active => active?<CheckCircleTwoTone twoToneColor="#52c41a" />:<CloseCircleTwoTone twoToneColor="#eb2f96"/>,
+            width: '10%'
         },
     ]
     return (
@@ -57,7 +68,7 @@ export function ShortUrl(props) {
 
                 <Divider orientation="left">历史短网址</Divider>
 
-                <Table style={{width:'100%'}} columns={columns} dataSource={props.data} pagination={false}/>
+                <Table style={{maxWidth:"100%"}}  columns={columns} dataSource={props.data} pagination={false}/>
             </Row>
         </div>
     )

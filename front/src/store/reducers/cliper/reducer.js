@@ -18,7 +18,7 @@ const defaultValue = {
     }
 }
 
-export const reducer = (state = defaultValue, action) => {
+export const cliper = (state = defaultValue, action) => {
     let data = JSON.parse(JSON.stringify(state));
     switch (action.type) {
         case Login.CHANGE_DIALOG_VISIBLE:
@@ -76,3 +76,5 @@ export const reducer = (state = defaultValue, action) => {
     }
     return state;
 }
+
+

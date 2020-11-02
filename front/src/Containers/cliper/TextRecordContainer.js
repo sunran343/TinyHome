@@ -115,10 +115,10 @@ function TextRecordContainer(props) {
 }
 
 const mapStateToProps = (state) => ({
-    isLogin: state.isLogin,
-    records: state.records.texts,
-    user: state.user,
-    inputValue: state.records.inputValue
+    isLogin: state.cliper.isLogin,
+    records: state.cliper.records.texts,
+    user: state.cliper.user,
+    inputValue: state.cliper.records.inputValue
 });
 const mapDispatchToProps = (dispatch) => ({
     addTextRecords: (v) => {

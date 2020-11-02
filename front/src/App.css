@@ -59,6 +59,7 @@
     .ant-layout-header {
         height: 50px !important;
         line-height: 50px !important;
+        padding: 0 0 !important;
     }
 
     .ant-layout-content {

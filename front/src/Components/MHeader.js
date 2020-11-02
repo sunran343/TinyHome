@@ -18,7 +18,7 @@ export default function MHeader(props) {
                     </Menu>
                 </Col>
                 <Col>
-                    <Text>你好,<Text type="success" strong={true}>{props.nick}</Text></Text>
+                    <Text >你好,<Text type="success" strong={true}>{props.nick}</Text></Text>
                 </Col>
                 <Col>
                     <Button type="link" onClick={props.handleLogout}

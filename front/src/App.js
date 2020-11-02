@@ -63,9 +63,9 @@ function App(props) {
 }
 
 const mapStateToProps = (state) => ({
-    records: state.records,
-    user: state.user,
-    isLogin: state.isLogin
+    records: state.cliper.records,
+    user: state.cliper.user,
+    isLogin: state.cliper.isLogin
 
 });
 const mapDispatchToProps = (dispatch) => ({

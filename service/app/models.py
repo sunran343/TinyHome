@@ -40,6 +40,7 @@ class ShortUrl(models.Model):
     url = models.CharField(max_length=2048, verbose_name='原始url', null=True)
     short_code = models.CharField(max_length=15, verbose_name='缩短码', null=True)
     is_active = models.BooleanField(default=True, verbose_name='状态', null=True)
+    is_delete = models.BooleanField(default=False, verbose_name='是否已删除', null=True)
     created_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间', null=True)
     user = models.ForeignKey('User', verbose_name='关联用户', related_name='shortUrl2UserId', on_delete=models.CASCADE, null=True)
 

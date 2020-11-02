@@ -64,8 +64,8 @@ function LoginContainer(props) {
 }
 
 const mapStateToProps = (state) => ({
-    cliperLogin: state.cliperLogin,
-    isLogin: state.isLogin
+    cliperLogin: state.cliper.cliperLogin,
+    isLogin: state.cliper.isLogin
 });
 const mapDispatchToProps = (dispatch) => ({
     changeInput: (e) => {
