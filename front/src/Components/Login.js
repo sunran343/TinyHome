@@ -23,7 +23,7 @@ export default function Login(props) {
                     <Input value={props.nickValue} size="large" placeholder="输入昵称" prefix={<UserOutlined/>}
                            onChange={props.handleInputChange}/>
 
-                    <Text type="danger">注:默认昵称即身份,如隐私需要可设置密码!</Text>
+                    <Text type="danger">注:昵称是你的身份哦，下次登录直接用昵称登录就好啦！</Text>
                 </Space>
 
 
