@@ -12,7 +12,7 @@ export default function Login(props) {
     return (
         <div>
             <Modal
-                title="告诉我,你的名字~"
+                title="告诉我,你的名字是什么~"
                 visible={props.visible}
                 onOk={props.handleOk}
                 onCancel={props.handleCancel}
